@@ -1,4 +1,4 @@
-function [velocityVec, RoCVec] = computeRateOfClimbPROPS(h, W, PmaxSL, throttleSetting, eta, CD0, ev, AR, S)
+function [velocityVec, RoCVec] = computeRateOfClimbPROPS(h, W, PmaxSL, throttleSetting, eta, CD0, ev, AR, S, plotOn)
 
 %COMPUTERATEOFCLIMBPROPS will calculate and plot RoC vs. V for a
 %propeller-driven aircraft at a particular altitude for all velocities 
@@ -14,6 +14,7 @@ function [velocityVec, RoCVec] = computeRateOfClimbPROPS(h, W, PmaxSL, throttleS
 %   - ev: Oswald efficiency factor. 
 %   - AR: Aspect ratio 
 %   - S: Wing planform area (m^2).
+%   - plotOn: Boolean that dictates whether or not to plot
 %
 %OUPUTS: 
 %   - velocityVec: A vector of velocities between Vmin and Vmax (just for
@@ -89,14 +90,17 @@ PRVec = 1 ./ (newCLVec.^(3/2) ./ newCDVec) .* sqrt(2 * W^3 / (rho * S));
 
 RoCVec = (PA - PRVec) / W; 
 
-plot(velocityVec, RoCVec, 'b')
-
-title('RoC vs. V')
-
-xlabel('V (m/s)')
-
-ylabel('RoC (m/s)')
-
-ylim([0, 1.10*max(RoCVec)])
+if plotOn == true
+    
+    plot(velocityVec, RoCVec, 'b')
+    
+    title('RoC vs. V')
+    
+    xlabel('V (m/s)')
+    
+    ylabel('RoC (m/s)')
+    
+    ylim([0, 1.10*max(RoCVec)])
+end
 
 end 

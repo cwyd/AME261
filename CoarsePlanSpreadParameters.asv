@@ -61,9 +61,9 @@ AR = b^2/S;
 W_0 = W_fuel+W_battery+W_craft;
 W_1 = W_0 - W_fuel;
 % Wpayload = W1 - W_empty - W_battery;
-
+% 
 % Drag 
-[velocityVec, DincVec, DcompVec] = computedragPROPS(h, W_0, S, b, C_D0, e, t_c, lambda, false)'
+[velocityVec, DincVec, D]
 
 % Power
 h = cruiseAlt;
@@ -97,10 +97,15 @@ groundRoll = computeGroundRoll(W_1, hAirport, C_D0, e, AR, S, b, C_Lmax, mu_r, w
 landingFieldLength = computeLandingFieldLength(W_1, hAirport, C_D0, e, AR, S, b, C_Lmax, mu_r, wingDistFromGround);
 
 % Turning Performance Calcs
+%L = C_L*cos(phi);
+%n = L/W;
 
 % Stability (static margin)
 
+
 % Ground effect calcs
+%phi_ground      = ; % Ground effect parameter
+
 
 %% PRINTING
 

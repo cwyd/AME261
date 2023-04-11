@@ -1,5 +1,5 @@
 function [velocityVec, DincVec, DcompVec] = computedragPROPS(h, W, S, b, CD0,...
-    ev, tOverC, Lambda)
+    ev, tOverC, Lambda, plotOn)
 
 %COMPUTEDRAG will calculate and plot the incompressible drag and compressible...
 %drag for a subsonic aircraft in steady, level flight.
@@ -25,6 +25,8 @@ function [velocityVec, DincVec, DcompVec] = computedragPROPS(h, W, S, b, CD0,...
 %     is used when computing the compressible drag.
 % 
 %   - Lambda: The wing sweep angle (in degrees). 
+%
+%   - plotOn: A boolean that dictates whether or not to plot
 %
 %   OUTPUTS:
 %   - velocityVec: A row vector containing velocities (spaced in 5 m/s
@@ -122,17 +124,19 @@ DcompVec = W ./ compLiftToDragVec;
 
 
 %Lastly, we can create our plot. 
-
-figure()
-
-plot(velocityVec, DincVec); 
-hold on 
-plot(velocityVec, DcompVec); 
-
-title('D_{inc}, D_{comp} vs. V_{∞}')
-xlabel('V_{∞} (m/s)')
-ylabel('D (N)')
-
-ylim([0, 2*10^5])
+if plotOn == true
+    
+    figure()
+    
+    plot(velocityVec, DincVec); 
+    hold on 
+    plot(velocityVec, DcompVec); 
+    
+    title('D_{inc}, D_{comp} vs. V_{∞}')
+    xlabel('V_{∞} (m/s)')
+    ylabel('D (N)')
+    
+    ylim([0, 2*10^5])
+end
 
 end 

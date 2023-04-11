@@ -5,7 +5,7 @@ function [P_R, PA, P_Rmin, v] = computePowerPROPS(h, CDo, e, S, b, CLmaxn, Wto, 
 AR = b^2/S; % Aspect Ratio
 k = 1/(pi*e*AR); % Design constant
 Em = 1/sqrt(4*k*CDo); % Max Lift-to-Drag ratio
-dens = stdatmos(h); % Atmospheric density at specified altitude h
+[T, dens, mu] = standardatmosphere(h); % Atmospheric density at specified altitude h
 PA = eta * Pmax_SL * dens/1.225; % Power available at h
 
 % Minimum and Maximum velocities at h
