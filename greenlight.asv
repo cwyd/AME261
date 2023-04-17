@@ -23,12 +23,12 @@ clc; clear; close all;
 %% DESIGN INPUTS
 C_D0            = 0.0202;
 C_Lmax          = 2;
-W_craft         = 41005;
-e               = 0.87;
-W_fuel          = 4188;
-W_battery       = 1000;
-S               = 100;
-b               = 10;
+W_craft         = 41005;    % [N]
+e               = 0.87;     
+W_fuel          = 4188;     % [N]
+W_battery       = 1000;     % [N]
+S               = 100;      % [m^2]
+b               = 10;       
 Cg              = 5;
 t_c             = 1;
 lambda          = 10;
@@ -47,13 +47,15 @@ engineNumber    = 2;
 cruiseAlt = 50;
 
 %% DESIGN REQUIREMENTS
-X_Clmax_req    = [0, 1];
-X_hv_req        = [0, 1];
-dG_req          = [0, 1];
-dLo_req         = [0, 1];
-emissions_req   = [0, 1];
-turning_req     = [0, 1]; 
-ground_req      = [0, 1];
+X_hv_req        = [1000*1852, Inf]; % Minimum range of 1000 nautical miles [m]
+dTOFL_req       = 4500*0.3048;      % TOFL dictated by 4500 feet
+dLFL_req        = 4500*0.3048;      % LFL dictated by 4500 feet
+hObstacle_req   = 50*0.3048;        % 50 foot obstacle [m]
+deltaWeight_req = 1;                % Must be 80% of the ATR (competing plane)
+RoCtheta_req    = atand(28000/1.215e+6);
+approachV_req   = 1;
+
+stability_req   = 1;
 
 %% COMPUTATIONS
 % Initial Calculations - What flying altitude? And does it change for each
@@ -63,7 +65,6 @@ h = 1;
 
 % Weights
 W_0 = W_fuel+W_battery+W_craft;
-W_1 = W_0 - W_fuel;
 
 % Drag - Which value to isolate from drag?
 [velocityVec, DincVec, DcompVec] = computedragPROPS(h, W_0, S, b, C_D0, e, t_c, lambda, false);
@@ -78,24 +79,16 @@ range = computeRangeBATT(eta_prop, h_battery, C_D0, e, AR, CL, W_battery, W_0);
 
 % Emissions
 
-% Rate of Climb - What weight to use, and what throttle setting?
+% Rate of Climb
 throttleSetting = 1;
 [velocityVec, RoCVec] = computeRateOfClimbPROPS(h, W_0, P_maxSL, throttleSetting, eta_prop, C_D0, e, AR, S, false);
-
-% Endurances of Prop - What CL to use?
-V = 1;
-endurance_Clh = computeEndurancePROPS([C_Lmax, h], W_0, W_1, SFC_P, eta_prop, e, S, AR, C_D0, 'constantCLh');
-endurance_Clv = computeEndurancePROPS([C_Lmax, V], W_0, W_1, SFC_P, eta_prop, e, S, AR, C_D0, 'constantCLV');
-endurance_hv  = computeEndurancePROPS([h, V], W_0, W_1, SFC_P, eta_prop, e, S, AR, C_D0, 'constanthV');
 
 % Takeoff
 hAirport = 0;
 P_maxSLOneEngine = P_maxSL/engineNumber;
-dLo = computeDLO(W_0, hAirport, C_D0, e, AR, S, b, C_Lmax, mu_r, wingDistFromGround, P_maxSL, eta_prop);
 TOFL = computeTakeoffFieldLength(W_0, hAirport, S, C_Lmax, throttleSetting, P_maxSLOneEngine);
 
 % Landing
-groundRoll = computeGroundRoll(W_1, hAirport, C_D0, e, AR, S, b, C_Lmax, mu_r, wingDistFromGround);
 landingFieldLength = computeLandingFieldLength(W_1, hAirport, C_D0, e, AR, S, b, C_Lmax, mu_r, wingDistFromGround);
 
 % Turning Performance Calcs

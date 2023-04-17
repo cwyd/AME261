@@ -17,42 +17,42 @@
 clc; clear; close all
 
 %% USER INPUTS
-A = 1;          % Aspect Ratio
-B_w = 1;        % Wing span [ft]
-H_t = 1;        % Horizontal tail height above fuselage [ft]
-H_v = 1;        % Vertical tail height above fuselage [ft]
-L = 1;          % Fuselage structural length [ft]
-L_D = 1;        % Duct length [ft]
+A = 10;          % Aspect Ratio
+B_w = 70;        % Wing span [ft]
+H_t = 10;        % Horizontal tail height above fuselage [ft]
+H_v = 5;        % Vertical tail height above fuselage [ft]
+L = 100;          % Fuselage structural length [ft]
+L_D = 20;        % Duct length [ft]
 L_m = 1;        % Length of main landing gear [ft]
 L_n = 1;        % Nose gear length [in]
 L_t = 1;        % Tail length [ft]
-Lambda = 1;     % Main wing sweep at 25% MAC
-Lambda_ht = 1;  % Horizontal tail sweep
-Lambda_vt = 1;  % Vertical tail sweep
-lambda_vt = 1;  % ?
-M = 1;          % Mach Number
-N_en = 1;       % Number of engines
-N_l = 1;        % Ultimate landing load factor
-N_p = 1;        % Number of personnel onboard (crew and passengers)
-N_t = 1;        % Number of fuel tanks
+Lambda = 0;     % Main wing sweep at 25% MAC
+Lambda_ht = 0;  % Horizontal tail sweep
+Lambda_vt = 0;  % Vertical tail sweep
+lambda_vt = 0;  % ?
+M = 0.4;          % Mach Number
+N_en = 8;       % Number of engines
+N_l = 1.8;        % Ultimate landing load factor
+N_p = 50;        % Number of personnel onboard (crew and passengers)
+N_t = 2;        % Number of fuel tanks
 N_z = 1;        % Ultimate load factor; = 1.5*limit load factor
-S_f = 1;        % Fuselage wetted area [ft^2]
-S_ht = 1;       % Horizontal tail area [ft^2]
-S_vt = 1;       % Vertical tail area [ft^2]
-S_w = 1;        % Trapezoidal wing area [ft^2]
+S_f = 100;        % Fuselage wetted area [ft^2]
+S_ht = 20;       % Horizontal tail area [ft^2]
+S_vt = 20;       % Vertical tail area [ft^2]
+S_w = 50;        % Trapezoidal wing area [ft^2]
 t_c = 1;
-V_i = 1;        % Integral tanks volume [gal]
-V_pr = 1;       % Volume of pressurized section [gal]
-V_t = 1;        % Total fuel volume [gal]
+V_i = 25;        % Integral tanks volume [gal]
+V_pr = 20;       % Volume of pressurized section [gal]
+V_t = 100;        % Total fuel volume [gal]
 W_dg = 10000;       % Design gross weight [lb]
-W_en = 1;       % Engine weight, each, [lb]
-W_fw = 1;       % Weight of fuel in wing [lb]
-W_l = 1;        % Landing design gross weight [lb]
-W_uav = 1;      % Uninstalled avionics weight [lb]
+W_en = 100;       % Engine weight, each, [lb]
+W_fw = 100;       % Weight of fuel in wing [lb]
+W_l = 2000;        % Landing design gross weight [lb]
+W_uav = 25;      % Uninstalled avionics weight [lb]
 lambda = 1;     
 lambda_h = 1;
-P_delta = 1;    % Cabin pressure differential [psi]
-q = 1;          % Dynamic pressure at cruise
+P_delta = 8;    % Cabin pressure differential [psi]
+q = 50;          % Dynamic pressure at cruise
 
 
 %% CALCULATIONS
