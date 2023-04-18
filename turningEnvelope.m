@@ -1,4 +1,4 @@
-function turningEnvelope(h, phi, W, S, ev, AR, CD0, Tmax, CLmax)
+function turningEnvelope(h, phi, W, S, ev, AR, CD0, Tmax, CLmax, n_struct)
 % TURNINGENVELOPE calculates and then plots an r-q and V-n graph
 % with used inputs
 % INPUTS:
@@ -11,6 +11,7 @@ function turningEnvelope(h, phi, W, S, ev, AR, CD0, Tmax, CLmax)
 %   - CD0: Zero lift drag coefficient
 %   - Tmax: Max thrust at sea level
 %   - CLmax: Max lift coefficient 
+%   - n_struct: n, structural
 
 %% CONSTANTS
 [~, rho] = standardatmosphere(h);
@@ -20,12 +21,7 @@ g = 9.81;    %m/s^2
 %% CALCULATIONS
 k = 1/(pi*ev*AR);
 Em = 1/sqrt(4*k*CD0);
-thrustA = ((Tmax*rho)/rhoSL); % Thrust available, combined, N
-
-%not sure which n is right to use. its one of these. For sure. 
-n = Em * Tmax/W;
-%n = 1/cosd(phi);
-
+thrustA = .7*((Tmax*rho)/rhoSL); % Thrust available, combined, N, *.7 to represent props
 
 % Calculate qmin and qmax values, which creates vmin and vmax values
 qmax = (thrustA/(2*CD0*S))*(1 + sqrt(1-((4*k*CD0)/(thrustA/W)^2))); %max q
