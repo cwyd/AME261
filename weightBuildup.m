@@ -17,12 +17,12 @@
 clc; clear; close all
 
 %% USER INPUTS
-A = 10;          % Aspect Ratio
-B_w = 70;        % Wing span [ft]
-H_t = 10;        % Horizontal tail height above fuselage [ft]
-H_v = 5;        % Vertical tail height above fuselage [ft]
-L = 100;          % Fuselage structural length [ft]
-L_D = 20;        % Duct length [ft]
+A = 13.5;          % Aspect Ratio
+B_w = 98.42;        % Wing span [ft]
+H_t = 14.17;        % Horizontal tail height above fuselage [ft]
+H_v = 14.17;        % Vertical tail height above fuselage [ft]
+L = 73.8;          % Fuselage structural length [ft]
+L_D = 10;        % Duct length [ft]
 L_m = 1;        % Length of main landing gear [ft]
 L_n = 1;        % Nose gear length [in]
 L_t = 1;        % Tail length [ft]
